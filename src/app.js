@@ -13,7 +13,7 @@ const profileRouter = require("./routes/profileRouter");
 const connectionRouter = require("./routes/connectionRouter"); 
 const userRouter = require("./routes/userRouter");
 
-const allowedOrigin = process.env.NODE_ENV_URL;
+const allowedOrigin = process.env.FRONTEND_URL;
 app.use(cors({
   origin :allowedOrigin,
   credentials: true,
