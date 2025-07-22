@@ -11,7 +11,7 @@ authRouter.post("/signup", async (req, res) => {
     //validation of data (Required Data)
     validateSignUpData(req);
 
-     const {
+    const {
       firstName,
       lastName,
       emailId,
@@ -46,7 +46,7 @@ authRouter.post("/signup", async (req, res) => {
       title,
     });
 
-      await user.save();
+    await user.save();
     res.send("User created successfully");
   } catch (error) {
     console.error("Signup Error:", error);
@@ -73,7 +73,10 @@ authRouter.post("/login", async (req, res) => {
 
       //ADDING token to the cookie and send response back to the user.
       res.cookie("token", token, {
-        expires: new Date(Date.now() + 8 * 3600000),
+        httpOnly: true, // ✅ Prevents access from JavaScript (security)
+        secure: true, // ✅ Required for HTTPS (Render uses HTTPS)
+        sameSite: "None", // ✅ Required for cross-site cookies
+        expires: new Date(Date.now() + 8 * 3600000), // 8 hours
       });
 
       res.send(user);
